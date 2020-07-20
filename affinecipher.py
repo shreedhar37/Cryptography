@@ -1,10 +1,10 @@
-def encrypt(text,k1,k2):
+def encrypt(text, k1, k2):
     result = ""
    #extract one character from string at a time and encrypt it.
     for i in range(len(text)):
         char = text[i]
         # spaces are ignored in encryption process
-        if char==" ":
+        if char == " ":
             result += " "      
         # checks if character is upper case or lower case.
         elif (char.isupper()):
@@ -17,15 +17,15 @@ def encrypt(text,k1,k2):
 
 #below function is used to calculate multiplicative inverse of key.
 def inverse(k1):
-    for i in range(1,27):
-        if (k1*i)%26==1:
+    for i in range(1, 27):
+        if (k1*i) % 26 == 1:
             return i
 
-def decrypt(enc,kinv,k2):
+def decrypt(enc, kinv, k2):
     result = ""
     for i in range(len(enc)):
         char = enc[i]
-        if char==" ":
+        if char == " ":
             result += " "
         elif (char.isupper()):
             # formula: plaintext = ((ciphertext-key2) * key⁻¹) mod 26
@@ -34,12 +34,9 @@ def decrypt(enc,kinv,k2):
             result += chr((((ord(char) - 97)-k2) * kinv) % 26 + 97 )
     return result        
 
-text = "SECURITY"
-k1 = 5
-k2 = 2
+plain_text = input("Enter the plaintext: ")
+k1, k2 = [int(x) for x in input("Enter the two keys sepearated by ,: ".split(', '))]
 kinv = inverse(k1)
-enc = encrypt(text,k1,k2)
-print ("Plain Text : " + text)
-print ("Shift pattern :({},{}) ".format(k1,k2))
-print ("Encryption (Cipher text): " + encrypt(text, k1,k2))
-print("Decryption (Plain text): " + decrypt(enc, kinv,k2))
+enc = encrypt(plain_text, k1, k2)
+print ("Encryption (Cipher text): " + encrypt(plain_text, k1, k2))
+print("Decryption (Plain text): " + decrypt(enc, kinv, k2))

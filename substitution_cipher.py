@@ -98,36 +98,37 @@ def affinedecrypt(enc, kinv, k2):
             result += chr((((ord(char) - 97)-k2) * kinv) % 26 + 97 )
     return result            
 
-while(1):
-    print("\n1.Additive Cipher\n2.Multiplicative Cipher\n3.Affine Cipher\n4.Exit")
-    n = int(input("Enter your choice: "))
-    if n == 1:
-        plain_text = input("\nEnter the plaintext: ")   
-        key = int(input("Enter the key: "))
-        choice = int(input("\n1.Encryption\n2.Decryption\nEnter your choice: "))
-        if choice == 1:
-            print("\nEncryption: "+additiveencrypt(plain_text, key))
-        else:
-            print("Decryption: "+additivedecrypt(additiveencrypt(plain_text, key), key)) 
-        
-    elif n == 2:
-        plain_text = input("\nEnter the plaintext: ") 
-        key = int(input("Enter the key: "))
-        choice = int(input("\n1.Encryption\n2.Decryption\nEnter your choice: "))
-        if choice == 1:
-            print("\nEncryption: "+mulencrypt(plain_text, key))
-        else:
-            print("Decryption: "+muldecrypt(mulencrypt(plain_text, key), inverse(key)))
+if __name__ == "__main__": 
+    while(1):
+        print("\n1.Additive Cipher\n2.Multiplicative Cipher\n3.Affine Cipher\n4.Exit")
+        n = int(input("Enter your choice: "))
+        if n == 1:
+            plain_text = input("\nEnter the plaintext: ")   
+            key = int(input("Enter the key: "))
+            choice = int(input("\n1.Encryption\n2.Decryption\nEnter your choice: "))
+            if choice == 1:
+                print("\nEncryption: "+additiveencrypt(plain_text, key))
+            else:
+                print("Decryption: "+additivedecrypt(additiveencrypt(plain_text, key), key)) 
+            
+        elif n == 2:
+            plain_text = input("\nEnter the plaintext: ") 
+            key = int(input("Enter the key: "))
+            choice = int(input("\n1.Encryption\n2.Decryption\nEnter your choice: "))
+            if choice == 1:
+                print("\nEncryption: "+mulencrypt(plain_text, key))
+            else:
+                print("Decryption: "+muldecrypt(mulencrypt(plain_text, key), inverse(key)))
 
+            
+        elif n == 3:
+            plain_text = input("\nEnter the plaintext: ")
+            key1, key2 = [int(x) for x in input("Enter key pair sepearated by comma:  ").split(', ')]
+            choice = int(input("\n1.Encryption\n2.Decryption\nEnter your choice: "))
+            if choice == 1:
+                print("\nEncryption: "+affineencrypt(plain_text, key1, key2))
+            else:
+                print("Decryption: "+affinedecrypt(plain_text, inverse(key1), key2))
         
-    elif n == 3:
-        plain_text = input("\nEnter the plaintext: ")
-        key1, key2 = [int(x) for x in input("Enter key pair sepearated by comma:  ").split(', ')]
-        choice = int(input("\n1.Encryption\n2.Decryption\nEnter your choice: "))
-        if choice == 1:
-            print("\nEncryption: "+affineencrypt(plain_text, key1, key2))
         else:
-            print("Decryption: "+affinedecrypt(plain_text, inverse(key1), key2))
-    
-    else:
-        exit(0)
+            exit(0)

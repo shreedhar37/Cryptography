@@ -31,8 +31,8 @@ def additivedecrypt(text,k):
         else:
             result += chr(((ord(char) - 97) - k) % 26 + 97)
     return result
-
-plain_text = input("Enter the plaintext: ")
-key = int(input("Enter the key: "))
-print("\nEncryption: "+additiveencrypt(plain_text, key))
-print("Decryption: "+additivedecrypt(additiveencrypt(plain_text, key), key))
+if __name__ == "__main__": 
+    plain_text = input("Enter the plaintext: ")
+    key = int(input("Enter the key: "))
+    print("\nEncryption: "+additiveencrypt(plain_text, key))
+    print("Decryption: "+additivedecrypt(additiveencrypt(plain_text, key), key))

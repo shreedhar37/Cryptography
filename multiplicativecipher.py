@@ -34,9 +34,10 @@ def decrypt(enc, kinv):
             result += chr(((ord(char) - 97) * kinv) % 26 + 97 )
     return result        
 
-plain_text = input("Enter the plaintext: ")
-k = int(input(("Enter the key: ")))
-kinv = inverse(k)
-enc = encrypt(plain_text, k)
-print ("Encryption (Cipher text): " + encrypt(plain_text, k))
-print("Decryption (Plain text): " + decrypt(enc, kinv))
+if __name__ == "__main__": 
+    plain_text = input("Enter the plaintext: ")
+    k = int(input(("Enter the key: ")))
+    kinv = inverse(k)
+    enc = encrypt(plain_text, k)
+    print ("Encryption (Cipher text): " + encrypt(plain_text, k))
+    print("Decryption (Plain text): " + decrypt(enc, kinv))

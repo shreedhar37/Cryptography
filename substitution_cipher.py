@@ -123,7 +123,7 @@ if __name__ == "__main__":
             
         elif n == 3:
             plain_text = input("\nEnter the plaintext: ")
-            key1, key2 = [int(x) for x in input("Enter key pair sepearated by comma:  ").split(', ')]
+            key1, key2 = [int(x) for x in input("Enter key pair sepearated by comma like(5, 2):  ").split(', ')]
             choice = int(input("\n1.Encryption\n2.Decryption\nEnter your choice: "))
             if choice == 1:
                 print("\nEncryption: "+affineencrypt(plain_text, key1, key2))

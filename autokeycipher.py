@@ -48,8 +48,9 @@ def autodecrypt(text, plain_text, key):
                 result += chr(((ord(char) - 97) - (ord(plain_text[i-1]) - 97)) % 26 + 97 )                  
     return result
 
-plain_text = input("Enter your message: ")
-plain_text = plain_text.replace(" ","")
-key = int(input("Enter the key: ")) 
-print("Encryption (Cipher text): " +autoencrypt(plain_text, key))
-print("Decryption (Plain text): " +autodecrypt(autoencrypt(plain_text, key), plain_text, key))
+if __name__ == "__main__": 
+    plain_text = input("Enter your message: ")
+    plain_text = plain_text.replace(" ","")
+    key = int(input("Enter the key: ")) 
+    print("Encryption (Cipher text): " +autoencrypt(plain_text, key))
+    print("Decryption (Plain text): " +autodecrypt(autoencrypt(plain_text, key), plain_text, key))

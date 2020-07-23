@@ -3,11 +3,9 @@ def additiveencrypt(text, k):
    #extract one character from string at a time and encrypt it.
     for i in range(len(text)):
         char = text[i]
-        # spaces are ignored in encryption process
-        if char == " ":
-            result += " "      
+        # spaces are ignored in encryption process     
         # checks if character is upper case or lower case.
-        elif (char.isupper()):
+        if (char.isupper()):
             # formula : ciphertext = (plaintext + key) mod 26 
             result += chr(((ord(char) - 65) + k) % 26 + 65)
       
@@ -20,11 +18,9 @@ def additivedecrypt(text,k):
    #extract one character from string at a time and encrypt it.
     for i in range(len(text)):
         char = text[i]
-        # spaces are ignored in encryption process
-        if char == " ":
-            result += " "      
+        # spaces are ignored in encryption process      
         # checks if character is upper case or lower case.
-        elif (char.isupper()):
+        if (char.isupper()):
             # formula : ciphertext = (plaintext - key) mod 26 
             result += chr(((ord(char) - 65) - k) % 26 + 65)
       
@@ -33,6 +29,7 @@ def additivedecrypt(text,k):
     return result
 if __name__ == "__main__": 
     plain_text = input("Enter the plaintext: ")
-    key = int(input("Enter the key: "))
+    plain_text = plain_text.replace(" ","")
+    key = int(input("Enter the key (range 0-25): "))
     print("\nEncryption: "+additiveencrypt(plain_text, key))
     print("Decryption: "+additivedecrypt(additiveencrypt(plain_text, key), key))

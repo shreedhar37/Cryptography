@@ -3,11 +3,9 @@ def additiveencrypt(text, k):
    #extract one character from string at a time and encrypt it.
     for i in range(len(text)):
         char = text[i]
-        # spaces are ignored in encryption process
-        if char == " ":
-            result += " "      
+        # spaces are ignored in encryption process   
         # checks if character is upper case or lower case.
-        elif (char.isupper()):
+        if (char.isupper()):
             # formula : ciphertext = (plaintext + key) mod 26 
             result += chr(((ord(char) - 65) + k) % 26 + 65)
       
@@ -20,11 +18,9 @@ def additivedecrypt(text, k):
    #extract one character from string at a time and encrypt it.
     for i in range(len(text)):
         char = text[i]
-        # spaces are ignored in encryption process
-        if char == " ":
-            result += " "      
+        # spaces are ignored in encryption process     
         # checks if character is upper case or lower case.
-        elif (char.isupper()):
+        if (char.isupper()):
             # formula : ciphertext = (plaintext - key) mod 26 
             result += chr(((ord(char) - 65) - k) % 26 + 65)
       
@@ -37,11 +33,9 @@ def mulencrypt(text, k):
    #extract one character from string at a time and encrypt it.
     for i in range(len(text)):
         char = text[i]
-        # spaces are ignored in encryption process
-        if char == " ":
-            result += " "      
+        # spaces are ignored in encryption process     
         # checks if character is upper case or lower case.
-        elif (char.isupper()):
+        if (char.isupper()):
             # formula : ciphertext = (plaintext * key ) mod 26 
             result += chr(((ord(char) - 65) * k) % 26 + 65)
       
@@ -59,9 +53,7 @@ def muldecrypt(enc,kinv):
     result = ""
     for i in range(len(enc)):
         char = enc[i]
-        if char == " ":
-            result += " "
-        elif (char.isupper()):
+        if (char.isupper()):
             # formula: plaintext = (ciphertext * key⁻¹) mod 26
             result += chr(((ord(char) - 65) * kinv) % 26 + 65)
         else:
@@ -73,11 +65,9 @@ def affineencrypt(text, k1, k2):
    #extract one character from string at a time and encrypt it.
     for i in range(len(text)):
         char = text[i]
-        # spaces are ignored in encryption process
-        if char==" ":
-            result += " "      
+        # spaces are ignored in encryption process      
         # checks if character is upper case or lower case.
-        elif (char.isupper()):
+        if (char.isupper()):
             # formula : ciphertext = ((plaintext * key1 )+key2) mod 26 
             result += chr(((ord(char) - 65) * k1 + k2) % 26 + 65)
       
@@ -89,9 +79,7 @@ def affinedecrypt(enc, kinv, k2):
     result = ""
     for i in range(len(enc)):
         char = enc[i]
-        if char == " ":
-            result += " "
-        elif (char.isupper()):
+        if (char.isupper()):
             # formula: plaintext = ((ciphertext-key2) * key⁻¹) mod 26
             result += chr((((ord(char) - 65)-k2) * kinv) % 26 + 65)
         else:
@@ -103,8 +91,9 @@ if __name__ == "__main__":
         print("\n1.Additive Cipher\n2.Multiplicative Cipher\n3.Affine Cipher\n4.Exit")
         n = int(input("Enter your choice: "))
         if n == 1:
-            plain_text = input("\nEnter the plaintext: ")   
-            key = int(input("Enter the key: "))
+            plain_text = input("\nEnter the plaintext: ")
+            plain_text = plain_text.replace(" ","")   
+            key = int(input("Enter the key (range 0-25): "))
             choice = int(input("\n1.Encryption\n2.Decryption\nEnter your choice: "))
             if choice == 1:
                 print("\nEncryption: "+additiveencrypt(plain_text, key))
@@ -113,7 +102,8 @@ if __name__ == "__main__":
             
         elif n == 2:
             plain_text = input("\nEnter the plaintext: ") 
-            key = int(input("Enter the key: "))
+            plain_text = plain_text.replace(" ","")
+            key = int(input("Enter the key (range 0-25): "))
             choice = int(input("\n1.Encryption\n2.Decryption\nEnter your choice: "))
             if choice == 1:
                 print("\nEncryption: "+mulencrypt(plain_text, key))
@@ -123,7 +113,8 @@ if __name__ == "__main__":
             
         elif n == 3:
             plain_text = input("\nEnter the plaintext: ")
-            key1, key2 = [int(x) for x in input("Enter key pair sepearated by comma like(5, 2):  ").split(', ')]
+            plain_text = plain_text.replace(" ","")
+            key1, key2 = [int(x) for x in input("Enter key pair (range 0-25) sepearated by comma like(5, 2) :  ").split(', ')]
             choice = int(input("\n1.Encryption\n2.Decryption\nEnter your choice: "))
             if choice == 1:
                 print("\nEncryption: "+affineencrypt(plain_text, key1, key2))

@@ -3,11 +3,9 @@ def encrypt(text, k1, k2):
    #extract one character from string at a time and encrypt it.
     for i in range(len(text)):
         char = text[i]
-        # spaces are ignored in encryption process
-        if char == " ":
-            result += " "      
+        # spaces are ignored in encryption process      
         # checks if character is upper case or lower case.
-        elif (char.isupper()):
+        if (char.isupper()):
             # formula : ciphertext = ((plaintext * key1 )+key2) mod 26 
             result += chr(((ord(char)-65) * k1 + k2) % 26 + 65)
       
@@ -25,9 +23,7 @@ def decrypt(enc, kinv, k2):
     result = ""
     for i in range(len(enc)):
         char = enc[i]
-        if char == " ":
-            result += " "
-        elif (char.isupper()):
+        if (char.isupper()):
             # formula: plaintext = ((ciphertext-key2) * key⁻¹) mod 26
             result += chr((((ord(char) - 65)-k2) * kinv) % 26 + 65)
         else:
@@ -36,7 +32,8 @@ def decrypt(enc, kinv, k2):
 
 if __name__ == "__main__": 
     plain_text = input("Enter the plaintext: ")
-    k1, k2 = [int(x) for x in input("Enter the two keys sepearated by comma like(5, 2): ").split(', ')]
+    plain_text = plain_text.replace(" ","")
+    k1, k2 = [int(x) for x in input("Enter the two keys (range(0-25)) sepearated by comma like(5, 2): ").split(', ')]
     kinv = inverse(k1)
     enc = encrypt(plain_text, k1, k2)
     print ("Encryption (Cipher text): " + encrypt(plain_text, k1, k2))

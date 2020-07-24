@@ -25,7 +25,7 @@ def autoencrypt(text, key):
 
 def autodecrypt(text, plain_text, key):
     result = ""
-   #extract one character from string at a time and encrypt it.
+   #extract one character from string at a time and decrypt it.
     for i in range(len(text)):
         char = text[i]
         #check for position to apply given key

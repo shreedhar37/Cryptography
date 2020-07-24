@@ -15,7 +15,7 @@ def additiveencrypt(text, k):
 
 def additivedecrypt(text, k):
     result = ""
-   #extract one character from string at a time and encrypt it.
+   #extract one character from string at a time and decrypt it.
     for i in range(len(text)):
         char = text[i]
         # spaces are ignored in encryption process     

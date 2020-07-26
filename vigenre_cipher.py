@@ -1,3 +1,4 @@
+import re
 def vigenre_encrypt(text, key):
     result = ""
     
@@ -44,6 +45,8 @@ def vigenre_decrypt(text, key):
 if __name__ == "__main__":
     plain_text = input("Enter your message: ")
     plain_text = plain_text.replace(" ","")
+    plain_text = plain_text.replace('.',"")
+    plain_text = re.sub(r'[0-9]','', plain_text)
     key = input("Enter the key like (PASCAL): ")
     key = key.replace(" ","")
     

@@ -1,3 +1,5 @@
+import re
+
 def autoencrypt(text, key):
     result = ""
    #extract one character from string at a time and encrypt it.
@@ -89,6 +91,9 @@ if __name__ == "__main__":
         choice = int(input("\n1.Monoalphabetic Substitution (Affine Cipher)\n2.Polyaplhabetic Substitution (Autokey Cipher)\n3.Exit\nSelect your choice: "))
         if choice == 1:
             plain_text = input("\nEnter the plaintext: ")
+            plain_text = plain_text.replace(" ","")
+            plain_text = plain_text.replace('.',"")
+            plain_text = re.sub(r'[0-9]','', plain_text)
             key1, key2 = [int(x) for x in input("Enter key pair sepearated by comma like(5, 2):  ").split(', ')]
             choice = int(input("\n1.Encryption\n2.Decryption\nEnter your choice: "))
             if choice == 1:
@@ -98,6 +103,8 @@ if __name__ == "__main__":
         elif choice == 2:
             plain_text = input("Enter your message: ")
             plain_text = plain_text.replace(" ","")
+            plain_text = plain_text.replace('.',"")
+            plain_text = re.sub(r'[0-9]','', plain_text)
             key = int(input("Enter the key: ")) 
             choice = int(input("\n1.Encryption\n2.Decryption\nEnter your choice: "))
             if choice == 1:

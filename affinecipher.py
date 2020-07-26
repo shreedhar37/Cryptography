@@ -1,3 +1,5 @@
+import re 
+
 def encrypt(text, k1, k2):
     result = ""
    #extract one character from string at a time and encrypt it.
@@ -33,6 +35,8 @@ def decrypt(enc, kinv, k2):
 if __name__ == "__main__": 
     plain_text = input("Enter the plaintext: ")
     plain_text = plain_text.replace(" ","")
+    plain_text = plain_text.replace('.',"")
+    plain_text = re.sub(r'[0-9]','', plain_text)
     k1, k2 = [int(x) for x in input("Enter the two keys (range(0-25)) sepearated by comma like(5, 2): ").split(', ')]
     kinv = inverse(k1)
     enc = encrypt(plain_text, k1, k2)

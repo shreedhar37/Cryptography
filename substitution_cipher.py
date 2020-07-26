@@ -1,3 +1,5 @@
+import re 
+
 def additiveencrypt(text, k):
     result = ""
    #extract one character from string at a time and encrypt it.
@@ -92,7 +94,9 @@ if __name__ == "__main__":
         n = int(input("Enter your choice: "))
         if n == 1:
             plain_text = input("\nEnter the plaintext: ")
-            plain_text = plain_text.replace(" ","")   
+            plain_text = plain_text.replace(" ","")
+            plain_text = plain_text.replace('.',"")
+            plain_text = re.sub(r'[0-9]','', plain_text)   
             key = int(input("Enter the key (range 0-25): "))
             choice = int(input("\n1.Encryption\n2.Decryption\nEnter your choice: "))
             if choice == 1:
@@ -103,6 +107,8 @@ if __name__ == "__main__":
         elif n == 2:
             plain_text = input("\nEnter the plaintext: ") 
             plain_text = plain_text.replace(" ","")
+            plain_text = plain_text.replace('.',"")
+            plain_text = re.sub(r'[0-9]','', plain_text)
             key = int(input("Enter the key (range 0-25): "))
             choice = int(input("\n1.Encryption\n2.Decryption\nEnter your choice: "))
             if choice == 1:
@@ -114,6 +120,8 @@ if __name__ == "__main__":
         elif n == 3:
             plain_text = input("\nEnter the plaintext: ")
             plain_text = plain_text.replace(" ","")
+            plain_text = plain_text.replace('.',"")
+            plain_text = re.sub(r'[0-9]','', plain_text)
             key1, key2 = [int(x) for x in input("Enter key pair (range 0-25) sepearated by comma like(5, 2) :  ").split(', ')]
             choice = int(input("\n1.Encryption\n2.Decryption\nEnter your choice: "))
             if choice == 1:

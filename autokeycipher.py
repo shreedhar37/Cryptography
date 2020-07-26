@@ -1,3 +1,5 @@
+import re 
+
 def autoencrypt(text, key):
     result = ""
    #extract one character from string at a time and encrypt it.
@@ -51,6 +53,8 @@ def autodecrypt(text, plain_text, key):
 if __name__ == "__main__": 
     plain_text = input("Enter your message: ")
     plain_text = plain_text.replace(" ","")
+    plain_text = plain_text.replace('.',"")
+    plain_text = re.sub(r'[0-9]','', plain_text)
     key = int(input("Enter the key: ")) 
     print("Encryption (Cipher text): " +autoencrypt(plain_text, key))
     print("Decryption (Plain text): " +autodecrypt(autoencrypt(plain_text, key), plain_text, key))

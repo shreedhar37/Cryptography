@@ -1,3 +1,6 @@
+
+import re
+
 def encrypt(text, k):
     result = ""
    #extract one character from string at a time and encrypt it.
@@ -13,12 +16,14 @@ def encrypt(text, k):
             result += chr(((ord(char) - 97) * k) % 26 + 97)
     return result
 
+
 #below function is used to calculate multiplicative inverse of key.
 def inverse(s):
     for i in range(1, 27):
         if (s*i) % 26 == 1:
             print(i)
             return i
+
 
 
 def decrypt(enc, kinv):
@@ -35,8 +40,10 @@ def decrypt(enc, kinv):
 if __name__ == "__main__": 
     plain_text = input("Enter the plaintext: ")
     plain_text = plain_text.replace(" ","")
-    k = int(input(("Enter the key range(0-25): ")))
+    plain_text = plain_text.replace('.',"")
+    plain_text = re.sub(r'[0-9]','', plain_text)
+    k = int(input("Enter the key from range (0-25):  "))
     kinv = inverse(k)
     enc = encrypt(plain_text, k)
-    print ("Encryption (Cipher text): " + encrypt(plain_text, k))
+    print("Encryption (Cipher text): " + encrypt(plain_text, k))
     print("Decryption (Plain text): " + decrypt(enc, kinv))

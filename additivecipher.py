@@ -1,3 +1,5 @@
+import re 
+
 def additiveencrypt(text, k):
     result = ""
    #extract one character from string at a time and encrypt it.
@@ -30,6 +32,8 @@ def additivedecrypt(text,k):
 if __name__ == "__main__": 
     plain_text = input("Enter the plaintext: ")
     plain_text = plain_text.replace(" ","")
+    plain_text = plain_text.replace('.',"")
+    plain_text = re.sub(r'[0-9]','', plain_text)
     key = int(input("Enter the key (range 0-25): "))
     print("\nEncryption: "+additiveencrypt(plain_text, key))
     print("Decryption: "+additivedecrypt(additiveencrypt(plain_text, key), key))

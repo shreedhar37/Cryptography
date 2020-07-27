@@ -87,4 +87,4 @@ if __name__ == "__main__":
     key = int(input())
     ct = railfence_encrypt((encrypt(plain_text, key)))
     print("Encryption (Cipher text) after applying Multiplicative Cipher and Railfence Cipher: " + ct)
-    print("Decryption (Plain text) after applying Railfence and Multiplicative Cipher: " + muldecrypt(railfence_decrypt(ct), inverse(key)))
+    print("Decryption (Plain text) after applying Railfence Cipher and Multiplicative Cipher: " + muldecrypt(railfence_decrypt(ct), inverse(key)))

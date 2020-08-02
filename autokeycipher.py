@@ -55,6 +55,8 @@ if __name__ == "__main__":
     plain_text = plain_text.replace(" ","")
     plain_text = plain_text.replace('.',"")
     plain_text = re.sub(r'[0-9]','', plain_text)
-    key = int(input("Enter the key: ")) 
-    print("Encryption (Cipher text): " +autoencrypt(plain_text, key))
-    print("Decryption (Plain text): " +autodecrypt(autoencrypt(plain_text, key), plain_text, key))
+    key_range = [1,3,5,7,9,11,15,17,19,21,23,25]
+    print("Enter the key from range: ",key_range)
+    k = int(input())
+    print("Encryption (Cipher text): " +autoencrypt(plain_text, k))
+    print("Decryption (Plain text): " +autodecrypt(autoencrypt(plain_text, k), plain_text, k))

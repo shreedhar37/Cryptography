@@ -94,7 +94,9 @@ if __name__ == "__main__":
             plain_text = plain_text.replace(" ","")
             plain_text = plain_text.replace('.',"")
             plain_text = re.sub(r'[0-9]','', plain_text)
-            key1, key2 = [int(x) for x in input("Enter key pair sepearated by comma like(5, 2):  ").split(', ')]
+            key_range = [1,3,5,7,9,11,15,17,19,21,23,25]
+            print("Enter the key pair from range sepearated by comma like(5, 2): ",key_range)
+            key1, key2 = [int(x) for x in input().split(', ')]
             choice = int(input("\n1.Encryption\n2.Decryption\nEnter your choice: "))
             if choice == 1:
                 print("\nEncryption: "+affineencrypt(plain_text, key1, key2))
@@ -105,12 +107,14 @@ if __name__ == "__main__":
             plain_text = plain_text.replace(" ","")
             plain_text = plain_text.replace('.',"")
             plain_text = re.sub(r'[0-9]','', plain_text)
-            key = int(input("Enter the key: ")) 
+            key_range = [1,3,5,7,9,11,15,17,19,21,23,25]
+            print("Enter the key from range: ",key_range)
+            k = int(input())
             choice = int(input("\n1.Encryption\n2.Decryption\nEnter your choice: "))
             if choice == 1:
-                print("\nEncryption (Cipher text): " +autoencrypt(plain_text, key))
+                print("\nEncryption (Cipher text): " +autoencrypt(plain_text, k))
             else:
-                print("Decryption (Plain text): " +autodecrypt(autoencrypt(plain_text, key), plain_text, key))
+                print("Decryption (Plain text): " +autodecrypt(autoencrypt(plain_text, k), plain_text, k))
         else:
             exit(0)
 

@@ -1,4 +1,3 @@
-
 import re
 
 def encrypt(text, k):
@@ -34,7 +33,7 @@ def decrypt(enc, kinv):
             # formula: plaintext = (ciphertext * key⁻¹) mod 26
             result += chr(((ord(char) - 65) * kinv) % 26 + 65)
         else:
-            result += chr(((ord(char) - 97) * kinv) % 26 + 97 )
+            result += chr(((ord(char) - 97) * kinv) % 26 + 97)
     return result        
 
 if __name__ == "__main__": 
@@ -42,7 +41,9 @@ if __name__ == "__main__":
     plain_text = plain_text.replace(" ","")
     plain_text = plain_text.replace('.',"")
     plain_text = re.sub(r'[0-9]','', plain_text)
-    k = int(input("Enter the key from range (0-25):  "))
+    key_range = [1,3,5,7,9,11,15,17,19,21,23,25]
+    print("Enter the key from range: ",key_range)
+    k = int(input())
     kinv = inverse(k)
     enc = encrypt(plain_text, k)
     print("Encryption (Cipher text): " + encrypt(plain_text, k))

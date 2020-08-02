@@ -97,24 +97,28 @@ if __name__ == "__main__":
             plain_text = plain_text.replace(" ","")
             plain_text = plain_text.replace('.',"")
             plain_text = re.sub(r'[0-9]','', plain_text)   
-            key = int(input("Enter the key (range 0-25): "))
+            key_range = [1,3,5,7,9,11,15,17,19,21,23,25]
+            print("Enter the key from range: ",key_range)
+            k = int(input())
             choice = int(input("\n1.Encryption\n2.Decryption\nEnter your choice: "))
             if choice == 1:
-                print("\nEncryption: "+additiveencrypt(plain_text, key))
+                print("\nEncryption: "+additiveencrypt(plain_text, k))
             else:
-                print("Decryption: "+additivedecrypt(additiveencrypt(plain_text, key), key)) 
+                print("Decryption: "+additivedecrypt(additiveencrypt(plain_text, k), k)) 
             
         elif n == 2:
             plain_text = input("\nEnter the plaintext: ") 
             plain_text = plain_text.replace(" ","")
             plain_text = plain_text.replace('.',"")
             plain_text = re.sub(r'[0-9]','', plain_text)
-            key = int(input("Enter the key (range 0-25): "))
+            key_range = [1,3,5,7,9,11,15,17,19,21,23,25]
+            print("Enter the key from range: ",key_range)
+            k = int(input())
             choice = int(input("\n1.Encryption\n2.Decryption\nEnter your choice: "))
             if choice == 1:
-                print("\nEncryption: "+mulencrypt(plain_text, key))
+                print("\nEncryption: "+mulencrypt(plain_text, k))
             else:
-                print("Decryption: "+muldecrypt(mulencrypt(plain_text, key), inverse(key)))
+                print("Decryption: "+muldecrypt(mulencrypt(plain_text, k), inverse(k)))
 
             
         elif n == 3:
@@ -122,7 +126,8 @@ if __name__ == "__main__":
             plain_text = plain_text.replace(" ","")
             plain_text = plain_text.replace('.',"")
             plain_text = re.sub(r'[0-9]','', plain_text)
-            key1, key2 = [int(x) for x in input("Enter key pair (range 0-25) sepearated by comma like(5, 2) :  ").split(', ')]
+            print("Enter the key pair from range sepearated by comma like(5, 2): ",key_range)
+            key1, key2 = [int(x) for x in input().split(', ')]
             choice = int(input("\n1.Encryption\n2.Decryption\nEnter your choice: "))
             if choice == 1:
                 print("\nEncryption: "+affineencrypt(plain_text, key1, key2))

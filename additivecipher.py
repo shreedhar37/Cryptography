@@ -29,6 +29,7 @@ def additivedecrypt(text,k):
         else:
             result += chr(((ord(char) - 97) - k) % 26 + 97)
     return result
+
 if __name__ == "__main__": 
     plain_text = input("Enter the plaintext: ")
     plain_text = plain_text.replace(" ","")
@@ -37,5 +38,5 @@ if __name__ == "__main__":
     key_range = [1,3,5,7,9,11,15,17,19,21,23,25]
     print("Enter the key from range: ",key_range)
     k = int(input())    
-    print("\nEncryption: "+additiveencrypt(plain_text, k))
-    print("Decryption: "+additivedecrypt(additiveencrypt(plain_text, k), k))
+    print("\nEncryption: " + additiveencrypt(plain_text, k))
+    print("Decryption: " + additivedecrypt(additiveencrypt(plain_text, k), k))

@@ -37,16 +37,16 @@ def private_key(e, phi_of_n):
         t = t1 - (q * t2)
         t1 = t2 
         t2 = t
-        if r1 == 1:
-            r1 = t1
-            break
+    
+    if r1 == 1:
+        r1 = t1
+        
 
     # negative numbers are not used in cryptography so we make addition of modulo value and negative number to make it positive.        
-    if t1 == -t1: 
-        return (phi_of_n + t1)         
-    
-    else:
-        return r1 
+    if t1 < 0 : 
+        r1 = phi_of_n + t1
+
+    return r1    
 
 def RSA_Encryption(plain_text, e, n):
     # Formula: Cipher text = (Plaint text ^ Public key) mod n

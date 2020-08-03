@@ -38,11 +38,27 @@ def encrypt(text, k):
     return result
 
 # function that will calculate and return multiplicative inverse of key.
-def inverse(key):
+def inverse(k1):
+    r1, r2, t1, t2 = 26, k1, 0, 1
     
-    for i in range(26):
-        if (key * i) % 26 == 1:
-            return i
+    while r2 > 0:
+        q = r1 // r2
+        r = r1 - (q * r2)
+        r1 = r2
+        r2 = r
+        t = t1 - (q * t2)
+        t1 = t2 
+        t2 = t
+        if r1 == 1:
+            r1 = t1
+            break
+
+    # negative numbers are not used in cryptography so we make addition of modulo value and negative number to make it positive.        
+    if t1 == -t1: 
+        return (26 + t1)         
+    
+    else:
+        return r1 
 
 def railfence_decrypt(ct):
     ciphertext = ct

@@ -46,10 +46,27 @@ def mulencrypt(text, k):
     return result
 
 #below function is used to calculate multiplicative inverse of key.
-def inverse(s):
-    for i in range(1, 27):
-        if (s*i) % 26 == 1:
-            return i
+def inverse(k1):
+    r1, r2, t1, t2 = 26, k1, 0, 1
+    
+    while r2 > 0:
+        q = r1 // r2
+        r = r1 - (q * r2)
+        r1 = r2
+        r2 = r
+        t = t1 - (q * t2)
+        t1 = t2 
+        t2 = t
+        if r1 == 1:
+            r1 = t1
+            break
+
+    # negative numbers are not used in cryptography so we make addition of modulo value and negative number to make it positive.        
+    if t1 == -t1: 
+        return (26 + t1)         
+    
+    else:
+        return r1 
 
 def muldecrypt(enc,kinv):
     result = ""
@@ -83,10 +100,10 @@ def affinedecrypt(enc, kinv, k2):
         char = enc[i]
         if (char.isupper()):
             # formula: plaintext = ((ciphertext-key2) * key⁻¹) mod 26
-            result += chr((((ord(char) - 65)-k2) * kinv) % 26 + 65)
+            result += chr((((ord(char) - 65) - k2) * kinv) % 26 + 65)
         else:
-            result += chr((((ord(char) - 97)-k2) * kinv) % 26 + 97 )
-    return result            
+            result += chr((((ord(char) - 97) - k2) * kinv) % 26 + 97 )
+    return result        
 
 if __name__ == "__main__": 
     while(1):
@@ -126,13 +143,18 @@ if __name__ == "__main__":
             plain_text = plain_text.replace(" ","")
             plain_text = plain_text.replace('.',"")
             plain_text = re.sub(r'[0-9]','', plain_text)
-            print("Enter the key pair from range sepearated by comma like(5, 2): ",key_range)
-            key1, key2 = [int(x) for x in input().split(', ')]
+            key_range = [1,3,5,7,9,11,15,17,19,21,23,25]
+            print("Enter key pair like 5, 2 from given key range: ", key_range)
+            k1, k2 = [int(x) for x in input().split(', ')]
+            kinv = inverse(k1)
             choice = int(input("\n1.Encryption\n2.Decryption\nEnter your choice: "))
             if choice == 1:
-                print("\nEncryption: "+affineencrypt(plain_text, key1, key2))
+                print("\nEncryption: "+affineencrypt(plain_text, k1, k2))
             else:
-                print("Decryption: "+affinedecrypt(plain_text, inverse(key1), key2))
+                key_inv = inverse(k1)
+                ct = affineencrypt(plain_text, k1, k2)
+                print("Decryption: " + affinedecrypt(ct, key_inv, k2))
+                
         
         else:
             exit(0)

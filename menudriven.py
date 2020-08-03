@@ -81,15 +81,13 @@ def inverse(k1):
         t2 = t
     
     if r1 == 1:
-        r1 = t1
-        return r1 
+        r1 = t1 
 
     # negative numbers are not used in cryptography so we make addition of modulo value and negative number to make it positive.        
-    elif t1 == -t1: 
-        return (26 + t1)         
+    if t1 < 0: 
+        r1 = (26 + t1)         
     
-    else:
-        return r1 
+    return r1 
 
 def affinedecrypt(enc, kinv, k2):
     result = ""

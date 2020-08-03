@@ -1,4 +1,5 @@
 import re
+
 def vigenre_encrypt(text, key):
     result = ""
     
@@ -58,7 +59,7 @@ if __name__ == "__main__":
 
     elif len(key) > len(plain_text):
         diff = len(key) - len(plain_text)
-        key = key[ :diff]
+        key = key[ :diff+1]
         
     print("Encryption (Cipher Text): " +vigenre_encrypt(plain_text, key))
     print("Decryption (Plain Text): " +vigenre_decrypt(vigenre_encrypt(plain_text, key), key))

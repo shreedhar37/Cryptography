@@ -1,5 +1,5 @@
 import re  # regular expression module to check particular pattern in given string.
-import sympy #to generate prime numbers.
+import sympy #"pip install sympy" without quotes for installing sympy module. It is used to generate prime numbers. 
 import math #for gcd
 
 def checkprime(n):
@@ -27,22 +27,26 @@ def public_key(phi_of_n, p, q):
     return li1
 
 def private_key(e, phi_of_n):
-    for i in range(phi_of_n + 1):
-        if ((e * i ) % phi_of_n) == 1:
-            return i
+    r1, r2, t1, t2 = phi_of_n, e, 0, 1
+    
+    while r2 > 0:
+        q = r1 // r2
+        r = r1 - (q * r2)
+        r1 = r2
+        r2 = r
+        t = t1 - (q * t2)
+        t1 = t2 
+        t2 = t
+        if r1 == 1:
+            r1 = t1
+            break
 
-# def plain_text_to_no(plain_text):
-    plain_text_no = ""
+    # negative numbers are not used in cryptography so we make addition of modulo value and negative number to make it positive.        
+    if t1 == -t1: 
+        return (phi_of_n + t1)         
     
-    for i in range(len(plain_text)):
-        char = plain_text[i]
-        
-        if char.isupper():
-            plain_text_no += str(ord(char) - 65)
-        else:
-            plain_text_no += str(ord(char) - 97)
-    
-    return plain_text_no            
+    else:
+        return r1 
 
 def RSA_Encryption(plain_text, e, n):
     # Formula: Cipher text = (Plaint text ^ Public key) mod n
@@ -128,7 +132,7 @@ if __name__ == "__main__":
     plain_text = plain_text.upper()
     plain_text = plain_text.replace(" ", "")
     plain_text = re.sub(r'[0-9]','', plain_text)
-    print("Message after removing space and numbers: " + plain_text)
+    print("Message capitalized after removing space and numbers: " + plain_text)
     n = p * q
     print("n:", n)
     phi_of_n = (p - 1) * (q - 1)
@@ -136,18 +140,18 @@ if __name__ == "__main__":
     key_range = public_key(phi_of_n, p, q)
     
     try:
-        print("Select any public key from given range:", key_range)
-        e = int(input())
+        print(key_range)
+        e = int(input("Select any public key from given range: "))
         while e not in key_range:
-            print("Select any public key from given range only:", key_range)
-            e = int(input())
+            print(key_range)
+            e = int(input("Select public key from given range only!: "))
     except ValueError:
         print("Please enter value in numbers only!")
-        print("Select any public key from given range:", key_range)
-        e = int(input())
+        print(key_range)
+        e = int(input("Select any public key from given range: "))
         while e not in key_range:
-            print("Select any public key from given range only:", key_range)
-            e = int(input())
+            print(key_range)
+            e = int(input("Select any public key from given range only: "))
     
     print("Public key:", e)
     d = private_key(e, phi_of_n)
@@ -157,9 +161,9 @@ if __name__ == "__main__":
     choice = int(input("1.Encryption\n2.Decryption\nSelect option number: "))
     
     if choice == 1:
-        print("Encryption (Cipher Text): ",ct)
+        print("Encryption (Cipher Text): ", ct)
     else: 
-        print("Decryption (Plain Text): ",pt)
+        print("Decryption (Plain Text): " + pt)
     
     
 

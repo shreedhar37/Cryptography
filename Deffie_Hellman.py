@@ -1,19 +1,31 @@
-def pubkey(p,x,y,c):
-    pub_key_alice = (c**x)%p
-    pub_key_bob = (c**y)%p
-    return pub_key_alice,pub_key_bob
+def checkprime(n):
+    if n > 1:  
+        for i in range(2,n):  
+            if (n % i) == 0:  
+                return 1                
+            else:  
+                return 0  
+    else:  
+        return 1  
 
-def secret_key(pubkeyalice,pub_key_bob,x,y,p):
-    secret_key_alice = (pub_key_bob**x)%p
-    secret_key_bob = (pubkeyalice**y)%p
-    return secret_key_alice,secret_key_bob
+
+
+def pubkey(p, x, y, c):
+    pub_key_alice = (c ** x) % p
+    pub_key_bob = (c ** y) % p
+    return pub_key_alice, pub_key_bob
+
+def secret_key(pubkeyalice, pub_key_bob, x, y, p):
+    secret_key_alice = (pub_key_bob ** x) % p
+    secret_key_bob = (pubkeyalice ** y) % p
+    return secret_key_alice, secret_key_bob
     
-def gcd(a,b):
+def gcd(a, b):
     while b != 0:
         a, b = b, a % b
     return a
 
-def primRoots(modulo):
+def primeroots(modulo):
     roots = []
     required_set = set(num for num in range (1, modulo) if gcd(num, modulo) == 1)
 
@@ -24,15 +36,47 @@ def primRoots(modulo):
     return roots
 
 if __name__ == "__main__":
-    p = int(input("Enter the prime number p: "))
+    
+    global p
+    
+    try:
+        p = int(input("Enter prime number p:"))
+        while checkprime(p) == 1:
+            p = int(input("Please enter prime number only, p: "))
+
+        
+    except ValueError:
+        print("Please enter value in numbers only!")
+        
+        p = int(input("Enter prime number p:"))
+        while checkprime(p) == 1:
+            p = int(input("Please enter prime number only, p: "))
+
+   
     x = int(input("Enter the private key for alice: "))
     y = int(input("Enter the private key for bob: "))
-    primitive_roots = primRoots(p)
-    print("primitive roots: ",primitive_roots)
-    c = int(input("Select any primitive number from above: "))
-    pubkeyalice,publickeybob = pubkey(p,x,y,c)
-    secret_key_alice,secret_key_bob = secret_key(pubkeyalice,publickeybob,x,y,p)
-    print("Public key of alice: ",pubkeyalice)
-    print("Public key of bob: ",publickeybob)
-    print("secret key of alice:",secret_key_alice)
-    print("secret key of bob: ",secret_key_bob)
+    
+    primitive_roots = primeroots(p)
+    
+    try:
+        print(primitive_roots)
+        c = int(input("Select any public key from given range: "))
+        while c not in primitive_roots:
+            print(primitive_roots)
+            c = int(input("Select public key from given range only!: "))
+    except ValueError:
+        print("Please enter value in numbers only!")
+        print(primitive_roots)
+        c = int(input("Select any public key from given range: "))
+        while c not in primitive_roots:
+            print(primitive_roots)
+            c = int(input("Select any public key from given range only: "))
+
+
+    pubkeyalice,publickeybob = pubkey(p, x, y, c)
+    secret_key_alice,secret_key_bob = secret_key(pubkeyalice, publickeybob ,x ,y, p)
+    
+    print("Public key of alice: ", pubkeyalice)
+    print("Public key of bob: ", publickeybob)
+    print("shared secret key of alice:", secret_key_alice)
+    print("shared secret key of bob: ", secret_key_bob)

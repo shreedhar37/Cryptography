@@ -1,13 +1,16 @@
 from math import pow
+
 def checkprime(n):
-    if n > 1:  
-        for i in range(2,n):  
+    if n > 0:  
+        for i in range(2,int(n ** 0.5) + 1):  
             if (n % i) == 0:  
-                return 1                
-            else:  
-                return 0  
-    else:  
-        return 1  
+                return 0                
+        
+        else: 
+            return 1  
+    else:
+        return 0      
+    
 
 
 
@@ -42,7 +45,7 @@ if __name__ == "__main__":
     
     try:
         p = int(input("Enter prime number p:"))
-        while checkprime(p) == 1:
+        while checkprime(p) == 0:
             p = int(input("Please enter prime number only, p: "))
 
         
@@ -50,7 +53,7 @@ if __name__ == "__main__":
         print("Please enter value in numbers only!")
         
         p = int(input("Enter prime number p:"))
-        while checkprime(p) == 1:
+        while checkprime(p) == 0:
             p = int(input("Please enter prime number only, p: "))
 
    

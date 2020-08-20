@@ -3,14 +3,15 @@ import sympy #"pip install sympy" without quotes for installing sympy module. It
 import math #for gcd
 
 def checkprime(n):
-    if n > 1:  
-        for i in range(2,n):  
+    if n > 0:  
+        for i in range(2,int(n ** 0.5) + 1):  
             if (n % i) == 0:  
-                return 1                
-            else:  
-                return 0  
-    else:  
-        return 1  
+                return 0                
+        
+        else: 
+            return 1  
+    else:
+        return 0
 
 def coprime(a, b):
     return math.gcd(a, b) == 1
@@ -88,44 +89,44 @@ if __name__ == "__main__":
     
     try:
         p = int(input("Enter prime number p:"))
-        while checkprime(p) == 1:
+        while checkprime(p) == 0:
             p = int(input("Please enter prime number only, p: "))
 
         q = int(input("Enter prime number q: "))
-        while checkprime(q) == 1:
+        while checkprime(q) == 0:
             q = int(input("Please enter prime number only, q: "))
     
     except ValueError:
         print("Please enter value in numbers only!")
         
         p = int(input("Enter prime number p:"))
-        while checkprime(p) == 1:
+        while checkprime(p) == 0:
             p = int(input("Please enter prime number only, p: "))
         
         q = int(input("Enter prime number q: "))
-        while checkprime(q) == 1:
+        while checkprime(q) == 0:
             q = int(input("Please enter prime number only, q: "))    
     
     while p == q :
         print("Please do not enter same values for p and q!")
         try:
             p = int(input("Enter prime number p:"))
-            while checkprime(p) == 1:
+            while checkprime(p) == 0:
                 p = int(input("Please enter prime number only, p: "))
 
             q = int(input("Enter prime number q: "))
-            while checkprime(q) == 1:
+            while checkprime(q) == 0:
                 q = int(input("Please enter prime number only, q: "))
     
         except ValueError:
             print("Please enter value in numbers only!")
         
             p = int(input("Enter prime number p:"))
-            while checkprime(p) == 1:
+            while checkprime(p) == 0:
                 p = int(input("Please enter prime number only, p: "))
         
             q = int(input("Enter prime number q: "))
-            while checkprime(q) == 1:
+            while checkprime(q) == 0:
                 q = int(input("Please enter prime number only, q: "))
 
     plain_text = input("Enter your message: ")

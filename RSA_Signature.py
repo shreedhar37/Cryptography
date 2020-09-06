@@ -31,20 +31,6 @@ def private_key(e, phi_of_n):
         if ((e * i ) % phi_of_n) == 1:
             return i
 
-# def plain_text_to_no(plain_text):
-    plain_text_no = ""
-    
-    for i in range(len(plain_text)):
-        char = plain_text[i]
-        
-        if char.isupper():
-            plain_text_no += str(ord(char) - 65)
-        else:
-            plain_text_no += str(ord(char) - 97)
-    
-    return plain_text_no            
-
-
 def DSign(plain_text, d, n):
     # Formula: Digital Signature = (Plaint text ^ Private key) mod n
     x = []
